@@ -1,0 +1,27 @@
+require(fpp)
+ica <- read.csv ("C:\\Users\\SALA-C13\\Downloads\\ica.csv")
+icas <- ts (ica,start =2013, frequency = 12)
+
+
+MI <- auto.arima(icas, seasonal = F)
+MI1<- forecast(MI, h=4)
+as<-Arima(icas, order = c(3,1,0))
+as2<- forecast(as, h=4)
+as1<-Arima(icas, order = c(0,1,3))
+as3<- forecast(as1, h=4)
+
+
+
+plot(MI1, plot.conf=FALSE)
+lines(fitted(as), col="orange", type="o")
+lines(fitted(as1), col="purple", type="o")
+lines(fitted(MI1), col="green", type="o")
+fitted(MI1)
+
+plot(MI1, plot.conf=FALSE)
+lines(MI1$mean, col="blue", type="o")
+lines(as2$mean, col="red", type="o")
+lines(as3$mean, col="pink", type="o")
+
+
+
